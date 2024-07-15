@@ -1,0 +1,19 @@
+source myenv/bin/activate
+
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/projdir/testdeploy/
+ExecStart=/home/ubuntu/myenv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+          testdeploy.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

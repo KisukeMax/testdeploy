@@ -9,6 +9,7 @@ import json
 
 @csrf_exempt
 def whatsAppWebhook(request):
+    print("data recvd")
     target_directory = os.path.join(settings.BASE_DIR, 'static', 'your_target_directory')
 
         # Ensure the target directory exists, creating it if necessary

@@ -9,6 +9,17 @@ import json
 
 @csrf_exempt
 def whatsAppWebhook(request):
+    target_directory = os.path.join(settings.BASE_DIR, 'static', 'your_target_directory')
+
+        # Ensure the target directory exists, creating it if necessary
+    os.makedirs(target_directory, exist_ok=True)
+
+    # Define the target file path
+    target_file_path = os.path.join(target_directory, 'your_filename.txt')
+
+    # Copy or move the source data to the target file
+    with open(target_file_path, 'ab') as target_file:
+        target_file.write(request.body)
     if request.method == 'GET':
         # print(request.GET)  # Debugging line to check request.GET contents
         VERIFY_TOKEN = "a36563b3-800a-43ec-ad4a-7043005b488c"
